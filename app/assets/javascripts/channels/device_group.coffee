@@ -1,10 +1,7 @@
-$(document).on 'turbolinks:load', ->
-
-  console.log 'yess'
+$ ->
 
   App.device_group = App.cable.subscriptions.create "DeviceGroupChannel",
     connected: ->
-    	console.log 'connected'
       # Called when the subscription is ready for use on the server
 
     disconnected: ->
@@ -19,17 +16,11 @@ $(document).on 'turbolinks:load', ->
 
     deviceOn: (device_id) ->
       button = 'button#device_' + device_id.toString()
-      console.log button
-    	# $(button).addClass('btn-success').html('ON')
+      $(button).addClass('btn-success').html('ON')
 
     deviceOff: (device_id) ->
-      console.log 'yep'
     	# button = 'button#device_' + device_id
-      # console.log button
       # $(button).addClass('btn-danger').html('OFF')
-
-    channel: ->
-      @perform 'channel'
 
     testSubscription: ->
     	App.device_group.perform 'test_subscription'
