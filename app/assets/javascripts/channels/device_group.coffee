@@ -1,28 +1,35 @@
-App.device_group = App.cable.subscriptions.create "DeviceGroupChannel",
-  connected: ->
-  	console.log 'connected'
-    # Called when the subscription is ready for use on the server
+$(document).on 'turbolinks:load', ->
 
-  disconnected: ->
-    # Called when the subscription has been terminated by the server
+  console.log 'yess'
 
-  received: (data) ->
-  	switch data.state
-	  	when "device_on"
-	        @deviceOn(data.id)
-	    when "device_off"
-	     	@deviceOff(data.id)
-	    else
-    		#do nothing
+  App.device_group = App.cable.subscriptions.create "DeviceGroupChannel",
+    connected: ->
+    	console.log 'connected'
+      # Called when the subscription is ready for use on the server
 
-  deviceOn: (device_id) ->
-  	#jquerycode to change the color of the device with the id
+    disconnected: ->
+      # Called when the subscription has been terminated by the server
 
-  deviceOff: (device_id) ->
-  	#jquerycode to change the color of the device with the id
+    received: (data) ->
+    	switch data.state
+  	  	when "device_on"
+          @deviceOn(data.id)
+  	    when "device_off"
+  	     	@deviceOff(data.id)
 
-  channel: ->
-    @perform 'channel'
+    deviceOn: (device_id) ->
+      button = 'button#device_' + device_id.toString()
+      console.log button
+    	# $(button).addClass('btn-success').html('ON')
 
-  testSubscription: ->
-  	App.device_group.perform 'test_subscription'
+    deviceOff: (device_id) ->
+      console.log 'yep'
+    	# button = 'button#device_' + device_id
+      # console.log button
+      # $(button).addClass('btn-danger').html('OFF')
+
+    channel: ->
+      @perform 'channel'
+
+    testSubscription: ->
+    	App.device_group.perform 'test_subscription'
