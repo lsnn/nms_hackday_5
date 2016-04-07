@@ -1,7 +1,23 @@
-<div class="jumbotron">
-  <h1>Devices</h1>
-  <p>...</p>
-  <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>
-</div>
+<div class="container">
+  <div class="row">
 
-<%= @devices %>
+    <div class="jumbotron">
+      <h1>Devices</h1>
+    </div>
+
+    <% @devices.each do |d| %>
+
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Device <%= d.id %></h3>
+      </div>
+      <div class="panel-body">
+        State: <%= d.state %>
+        <button type="button" class="btn btn-success">ON</button>
+      </div>
+    </div>
+
+    <% end %>
+
+  </div>
+</div>
