@@ -7,7 +7,22 @@ App.device_group = App.cable.subscriptions.create "DeviceGroupChannel",
     # Called when the subscription has been terminated by the server
 
   received: (data) ->
-    # Called when there's incoming data on the websocket for this channel
+  	switch data.state
+	  	when "device_on"
+	        @deviceOn(data.id)
+	    when "device_off"
+	     	@deviceOff(data.id)
+	    else
+    		#do nothing
+
+  deviceOn: (device_id) ->
+  	#jquerycode to change the color of the device with the id
+
+  deviceOff: (device_id) ->
+  	#jquerycode to change the color of the device with the id
 
   channel: ->
     @perform 'channel'
+
+  testSubscription: ->
+  	App.device_group.perform 'test_subscription'
